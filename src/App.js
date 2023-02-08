@@ -6,6 +6,38 @@ function App() {
 	const [inputValue, setInputValue] = useState("");
 	const [todos, setTodos] = useState([]);
 
+
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		const newTodo = {
+			inputValue: inputValue,
+			id: todos.length,
+			checked: false,
+		};
+		setTodos([
+			newTodo,
+			...todos
+		]);
+		setInputValue("");
+	};
+
+	const handleEdit = (id, inputValue) => {
+		const newTodos = todos.map((todo) => {
+			if(todo.id === id) {
+				todo.inputValue = inputValue;
+			}
+			return todo;
+		});
+		setTodos(newTodos);
+	};
+
+	const handleChange = (e) => {
+		setInputValue(e.target.value);
+	};
+
+
 	const handleChecked = (id, checked) => {
 		setTodos(
 			todos.map((todo) => {
@@ -20,27 +52,8 @@ function App() {
 	const handleDelete = (id) => {
 		setTodos(todos.filter((todo) => todo.id !== id));
 
-	} 
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		setTodos([
-			...todos,
-			{
-				id: todos.length,
-				inputValue: inputValue,
-				checked: false,
-			},
-		]);
-		setInputValue("");
-	};
-
-	const handleChange = (e) => {
-		setInputValue(e.target.value);
-	};
-
-
+	}
+	
   return (
     <div className="App">
 		<div>
@@ -52,9 +65,11 @@ function App() {
 			<ul className='todoList'>
 				{todos.map((todo) => (
 					<li key={todo.id}>
-						<div className={`todoValue ${todo.checked ? "completed" : ""}`}>
-						<span>{todo.inputValue}</span>
-						</div>
+						<input type="text"
+						onChange={(e) => handleEdit(todo.id, e.target.value)}
+						className="inputText"
+						value={todo.inputValue}
+						disabled={todo.checked} />
 						<input className='checkBox' type="checkbox" onChange={() => handleChecked(todo.id, todo.checked)} />
 						<button onClick={()=> handleDelete(todo.id)}>Delete</button>
 					</li>

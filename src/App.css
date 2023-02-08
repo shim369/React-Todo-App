@@ -38,6 +38,6 @@ ul li {
 .checkBox {
 	margin-right: 10px;
 }
-.completed {
+.inputText:disabled {
 	background-color: #ccc;
 }
