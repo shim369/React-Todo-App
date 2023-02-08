@@ -46,7 +46,7 @@ function App() {
 		<div>
 			<h2>React Todo App</h2>
 			<form onSubmit={handleSubmit}>
-				<input type="text" onChange={handleChange} className="inputText" />
+				<input type="text" onChange={handleChange} value={inputValue} className="inputText" />
 				<input type="submit" value="作成" className="submitButton" />
 			</form>
 			<ul className='todoList'>
