@@ -56,21 +56,23 @@ function App() {
 	
   return (
     <div className="App">
-		<div>
-			<h2>React Todo App</h2>
+		<div className='container'>
+		<h1>React Todo App</h1>
 			<form onSubmit={handleSubmit}>
 				<input type="text" onChange={handleChange} value={inputValue} className="inputText" />
-				<input type="submit" value="作成" className="submitButton" />
+				<button type="submit">Add</button>
 			</form>
 			<ul className='todoList'>
 				{todos.map((todo) => (
 					<li key={todo.id}>
 						<input type="text"
 						onChange={(e) => handleEdit(todo.id, e.target.value)}
-						className="inputText"
+						className="listText"
 						value={todo.inputValue}
 						disabled={todo.checked} />
-						<input className='checkBox' type="checkbox" onChange={() => handleChecked(todo.id, todo.checked)} />
+						{/* <input className='checkBox' type="checkbox" onChange={() => handleChecked(todo.id, todo.checked)} /> */}
+						
+						<input type="checkbox" id={`box-${todo.id}`} onChange={(e) => handleChecked(todo.id, todo.checked)} /><label htmlFor={`box-${todo.id}`}></label>
 						<button onClick={()=> handleDelete(todo.id)}>Delete</button>
 					</li>
 				))}
