@@ -1,6 +1,7 @@
 import './App.css';
 import React from "react";
 import { useState } from "react";
+import { v4 } from 'uuid';
 
 function App() {
 	const [inputValue, setInputValue] = useState("");
@@ -13,7 +14,7 @@ function App() {
 
 		const newTodo = {
 			inputValue: inputValue,
-			id: todos.length,
+			id: v4(),
 			checked: false,
 		};
 		setTodos([
